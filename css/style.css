@@ -23,7 +23,10 @@
       Variablerne bruges længere nede med var(--sun-size) og var(--car-w).
       Når siden virker: prøv at ændre værdierne. Hvad sker der?
    */
-
+   --sun-size:100px;
+   --car-w: 200px;  
+   --bus-w: 250px;
+   --truck-w: 250px;
 }
 
 /* ---------------------------------------------------------
@@ -48,14 +51,25 @@
      - background: en linear-gradient med de tre himmelfarver:
          var(--color-sky-top), var(--color-sky-mid), var(--color-sky-bot)
 */
-
+.scene {
+   position: relative;
+   height: 100vh;
+   overflow: hidden; 
+   background:linear-gradient(
+    var(--color-sky-top), 
+    var(--color-sky-mid), 
+    var(--color-sky-bot) 
+    );
+}
 
 
 /* Skriv selv: nat-tilstand
    JavaScript tilføjer klassen "night" til .scene, når man klikker på solen.
    Skriv en regel for .scene.night, der sætter background til var(--color-night).
 */
-
+.scene.night {
+   background: var(--color-night);
+}
 
 
 /* ---------------------------------------------------------
@@ -118,7 +132,9 @@
 --------------------------------------------------------- */
 .car1,
 .car2,
-.car3 {
+.car3,
+.bus,
+.truck {
    position: absolute;
    width: var(--car-w);
    max-width: 28vw;
@@ -153,7 +169,11 @@
 .car2 {
    bottom: 2.8vh;
    right: -30vw; /* starter 30vw uden for skærmen til højre */
-   animation: car2 12s linear infinite;
+   animation: car2 10s linear infinite;
+}
+@keyframes car2 {
+   0%   { transform: translateX(0) rotateY(180deg); }
+   100% { transform: translateX(-130vw) rotateY(180deg) ; }
 }
 
 /* Skriv selv: @keyframes car2
@@ -180,7 +200,10 @@
    left: -30vw; /* starter 30vw uden for skærmen til venstre */
    animation: car3 8s linear infinite;
 }
-
+@keyframes car3 {
+   0%   { transform: translateX(0) rotateY(180deg); }
+   100% { transform: translateX(130vw) rotateY(180deg) ; }
+}
 /* Skriv selv: @keyframes car3
    Brug car1 ovenfor som skabelon. Den blå bil kører samme vej som car1.
 
@@ -223,7 +246,10 @@
      - opacity til 1
      - transform til translateY(0)
 */
-
+.tooltip.is-visible {
+   opacity: 1;
+   transform: translateY(0);
+}
 
 
 
@@ -280,7 +306,17 @@
    bruge rotateY(180deg) her.
    Undersøg selv: hvad sker der, hvis du alligevel tilføjer den?
 */
+.bus {
+    bottom: 5vh;
+    right: -30vw;
+    width: var(--bus-w);
+    animation: bus 20s linear infinite;
+}
 
+@keyframes bus {
+   0%   { transform: translateX(0); }
+   100% { transform: translateX(-130vw) ; }
+}
 
 
 /* ---------------------------------------------------------
@@ -300,7 +336,17 @@
    OBS: truck'en vender også rigtigt i billedfilen, så du skal IKKE
    bruge rotateY(180deg) her.
 */
+.truck {
+    bottom: -3.4vh;
+    right: -30vw;
+    width: var(--bus-w);
+    animation: truck 14s linear infinite;
+}
 
+@keyframes truck {
+   0%   { transform: translateX(0); }
+   100% { transform: translateX(-130vw) ; }
+}
 
 
 /* ---------------------------------------------------------
